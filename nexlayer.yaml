@@ -1,0 +1,11 @@
+application:
+  name: opensearch
+  pods:
+  - name: app
+    image: opensearchproject/opensearch-dashboards:latest
+    path: /
+    servicePorts:
+    - 5601
+    vars:
+      OPENSEARCH_HOSTS: '["http://localhost:9200"]'
+      DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
