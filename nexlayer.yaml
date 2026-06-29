@@ -1,5 +1,5 @@
 application:
-  name: opensearch
+  name: opensearch-dashboards
   pods:
   - name: app
     image: mirror.gcr.io/opensearchproject/opensearch-dashboards:2.18.0
