@@ -1,11 +1,23 @@
 application:
-  name: opensearch
+  name: opensearch-dashboards
   pods:
   - name: app
-    image: opensearchproject/opensearch-dashboards:latest
+    image: mirror.gcr.io/opensearchproject/opensearch-dashboards:2.18.0
     path: /
     servicePorts:
     - 5601
     vars:
-      OPENSEARCH_HOSTS: '["http://localhost:9200"]'
+      OPENSEARCH_HOSTS: '["http://opensearch-node.pod:9200"]'
       DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
+      SERVER_HOST: "0.0.0.0"
+  - name: opensearch-node
+    image: mirror.gcr.io/opensearchproject/opensearch:2.18.0
+    servicePorts:
+    - 9200
+    vars:
+      discovery.type: "single-node"
+      DISABLE_SECURITY_PLUGIN: "true"
+      DISABLE_INSTALL_DEMO_CONFIG: "true"
+      bootstrap.memory_lock: "false"
+      OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
+      network.host: "0.0.0.0"
