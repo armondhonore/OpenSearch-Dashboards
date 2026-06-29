@@ -20,7 +20,4 @@ application:
       DISABLE_INSTALL_DEMO_CONFIG: "true"
       bootstrap.memory_lock: "false"
       OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
-    volumes:
-    - name: opensearch-data
-      mountPath: /usr/share/opensearch/data
-      size: 10Gi
+      network.host: "0.0.0.0"
